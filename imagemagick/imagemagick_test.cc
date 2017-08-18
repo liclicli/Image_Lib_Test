@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <pthread.h>
-#include <Magick++.h>
+#include <wand/magick_wand.h>
 void ReadJpgFile(const char *filename, unsigned char *&buff, size_t &size)
 {
   std::ifstream infile;
