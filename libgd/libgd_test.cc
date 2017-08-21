@@ -33,16 +33,14 @@ void* run_test(void *) {
   unsigned char *out_buf = NULL;
   ReadJpgFile("1.jpg",in_buf,insize);
   /* Declare the image */
-  gdImagePtr im;
-  im = gdImageCreateFromJpegPtr(insize,in_buf);
-  gdImageInterlace(im, 1);
-  out_buf = (unsigned char *)gdImageJpegPtr(im, &outsize, 75);
-
-
-  //WriteJpgFile("2.jpg",out_buf,outsize);
-  /* Destroy the image in memory. */
-  gdImageDestroy(im);
-  gdFree(out_buf);
+  for (int i = 0; i < 100; i++){
+    gdImagePtr im;
+    im = gdImageCreateFromJpegPtr(insize,in_buf);
+    gdImageInterlace(im, 1);
+    out_buf = (unsigned char *)gdImageJpegPtr(im, &outsize, 75);
+    gdImageDestroy(im);
+    gdFree(out_buf);
+  }
   delete in_buf;
 }
 int main(){
