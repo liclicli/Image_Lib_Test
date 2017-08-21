@@ -3,6 +3,9 @@
 
 /* Bring in standard I/O so we can output the PNG to a file */
 #include <stdio.h>
+#include <string.h>
+#include <fstream>
+#include <iostream>
 void ReadJpgFile(const char *filename, unsigned char *&buff, size_t &size)
 {
   std::ifstream infile;
