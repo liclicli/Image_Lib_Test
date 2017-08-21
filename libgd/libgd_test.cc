@@ -26,7 +26,7 @@ void WriteJpgFile(const char *filename, unsigned char *buff, size_t size)
   fout.write((char *)buff,size);
   fout.close();
 }
-void run_test(void *) {
+void* run_test(void *) {
   size_t insize = 0;
   int outsize = 0;
   unsigned char *in_buf = NULL;
