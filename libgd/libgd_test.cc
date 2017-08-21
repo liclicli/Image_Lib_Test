@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 #include <pthread.h>
+#define MAX_THREAD_NUM 4
 void ReadJpgFile(const char *filename, unsigned char *&buff, size_t &size)
 {
   std::ifstream infile;
