@@ -34,7 +34,7 @@ int main() {
   gdImagePtr im;
   im = gdImageCreateFromJpegPtr(insize,in_buf);
   gdImageInterlace(im, 1);
-  out_buf = gdImageJpegPtr(im, &outsize, 75);
+  out_buf = (unsigned char *)gdImageJpegPtr(im, &outsize, 75);
 
 
   WriteJpgFile("2.jpg",out_buf,outsize);
