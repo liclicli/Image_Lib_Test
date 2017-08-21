@@ -6,6 +6,7 @@
 #include <string.h>
 #include <fstream>
 #include <iostream>
+#include <pthread.h>
 void ReadJpgFile(const char *filename, unsigned char *&buff, size_t &size)
 {
   std::ifstream infile;
@@ -24,7 +25,7 @@ void WriteJpgFile(const char *filename, unsigned char *buff, size_t size)
   fout.write((char *)buff,size);
   fout.close();
 }
-int main() {
+void run_test(void *) {
   size_t insize = 0;
   int outsize = 0;
   unsigned char *in_buf = NULL;
@@ -37,9 +38,26 @@ int main() {
   out_buf = (unsigned char *)gdImageJpegPtr(im, &outsize, 75);
 
 
-  WriteJpgFile("2.jpg",out_buf,outsize);
+  //WriteJpgFile("2.jpg",out_buf,outsize);
   /* Destroy the image in memory. */
   gdImageDestroy(im);
   gdFree(out_buf);
   delete in_buf;
+}
+int main(){
+  pthread_t deal_thr[MAX_THREAD_NUM];
+  for(int i = 0; i < MAX_THREAD_NUM; i ++)
+  {
+    int ret=pthread_create(&deal_thr[i],NULL,run_test,NULL);
+    if(ret!=0)
+    {
+      printf("Create pthread error!\n");
+      return -1;
+    }
+  }
+  for(int i = 0; i < MAX_THREAD_NUM; i ++)
+  {
+    pthread_join(deal_thr[i],NULL);
+  }
+  return 0;
 }
