@@ -33,15 +33,19 @@ void* run_test(void *) {
   unsigned char *out_buf = NULL;
   ReadJpgFile("1.jpg",in_buf,insize);
   /* Declare the image */
+  static
   for (int i = 0; i < 100; i++){
     gdImagePtr im;
     im = gdImageCreateFromJpegPtr(insize,in_buf);
     gdImageInterlace(im, 1);
     out_buf = (unsigned char *)gdImageJpegPtr(im, &outsize, 75);
     gdImageDestroy(im);
+    if(i == 99) WriteJpgFile("2.jpg",out_buf,outsize); 
     gdFree(out_buf);
   }
   delete in_buf;
+  pthread_exit(0);
+  return NULL;
 }
 int main(){
   pthread_t deal_thr[MAX_THREAD_NUM];
