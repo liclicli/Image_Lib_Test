@@ -26,9 +26,9 @@ void WriteJpgFile(const char *filename, unsigned char *buff, size_t size)
 }
 int main() {
   size_t insize = 0;
-  size_t outsize = 0;
-  char *in_buf = NULL;
-  char *out_buf = NULL;
+  int outsize = 0;
+  unsigned char *in_buf = NULL;
+  unsigned char *out_buf = NULL;
   ReadJpgFile("1.jpg",in_buf,insize);
   /* Declare the image */
   gdImagePtr im;
